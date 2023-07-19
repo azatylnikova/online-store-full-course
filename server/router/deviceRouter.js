@@ -5,7 +5,7 @@ const deviceController = require('../controllers/deviceController')////  Имп�
 
 router.post('/', deviceController.create);
 router.get('/', deviceController.getAll)
-router.get('/', deviceController.getOne)
+router.get('/:id', deviceController.getOne)
 
 
 module.exports = router//// экспортируем этот роутер
