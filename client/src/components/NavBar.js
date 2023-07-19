@@ -1,34 +1,38 @@
-import React from 'react';
+import React , {useContext} from 'react';
 import { Context } from '..';
+
+import { NavLink } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+import { SHOP_ROUTE } from '../utils/consts';
 
 const NavBar = () => {
-    const {user} = userContext(Context)
+    const {user} = useContext(Context)
     return (
-        <>
-        <NavBar bg="dark" data-bs-theme="dark">
-            <Container>
-                <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-                <Nav className="me-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#features">Features</Nav.Link>
-                    <Nav.Link href="#pricing">Pricing</Nav.Link>
-                </Nav>
-            </Container>
-        </NavBar><br /><Navbar bg="primary" data-bs-theme="dark">
+        
+     <Navbar bg="dark" data-bs-theme="dark">
                 <Container>
-                    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                    <NavLink style={{color: 'white'}} to={SHOP_ROUTE} >Online-Store</NavLink>
+                    {user.isAuth ?
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        <Nav.Link href="#home">
+                            <Button value={'outline-light'}>Админ панель</Button>
+                            <Button value={'outline-light'}>Войти</Button>
+                            </Nav.Link>
                     </Nav>
+                    :
+                    <Nav className="me-auto">
+                        <Nav.Link href="#home">
+                            <Button value={'outline-light'}>Авторизация</Button>
+                            </Nav.Link>
+                    </Nav>}
+
                 </Container>
             </Navbar>
-            </>
+          
     );
 };
 
