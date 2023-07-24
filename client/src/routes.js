@@ -6,10 +6,7 @@ import Auth from "./pages/Auth";
 import DevicePage from "./pages/DevicePage";
 
 export const authRoutes = [
-    {
-        path: ADMIN_ROUTE,
-        Component: Admin
-    },
+   
     {
         path: BASKET_ROUTE,
         Component: Basket
@@ -20,6 +17,10 @@ export const publicRoutes = [
     {
         path: SHOP_ROUTE,
         Component: Shop
+    },
+    {
+        path: ADMIN_ROUTE,
+        Component: Admin
     },
     {
         path: LOGIN_ROUTE,

@@ -4,36 +4,55 @@ import { Context } from '..';
 import { NavLink } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
+import {observer} from "mobx-react-lite";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
-import { SHOP_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
+import { observable } from 'mobx';
 
-const NavBar = () => {
+import { useNavigate } from 'react-router-dom';
+
+const NavBar = observer( () => {
     const {user} = useContext(Context)
+    const navigate = useNavigate();
+
     return (
         
      <Navbar bg="dark" data-bs-theme="dark">
-                <Container>
-                    <NavLink style={{color: 'white'}} to={SHOP_ROUTE} >Online-Store</NavLink>
+                <Container style={{maxWidth: '100%'}}>
+                    <NavLink style={{color: 'white'}} to={SHOP_ROUTE}  >Online-Store</NavLink>
                     {user.isAuth ?
-                    <Nav className="me-auto">
-                        <Nav.Link href="#home">
-                            <Button value={'outline-light'}>Админ панель</Button>
-                            <Button value={'outline-light'}>Войти</Button>
-                            </Nav.Link>
+                    <Nav className="ml-auto">
+                       
+                          
+                                <Button
+                            variant={"outline-light"}
+                            onClick={() => navigate(ADMIN_ROUTE)}
+                        >
+                            Админ панель
+                        </Button>
+
+                        
+                            <Button
+                            onClick={() => navigate(LOGIN_ROUTE)}
+                            variant={"outline-light"}
+                            className='mx-2'>
+                            Выйти
+                        </Button>
+                           
                     </Nav>
                     :
-                    <Nav className="me-auto">
-                        <Nav.Link href="#home">
-                            <Button value={'outline-light'}>Авторизация</Button>
-                            </Nav.Link>
+                    <Nav className="ml-auto">
+                       
+                            <Button value={'outline-light'} onClick={() => user.setIsAuth(true)}>Авторизация</Button>
+                           
                     </Nav>}
 
                 </Container>
             </Navbar>
           
     );
-};
+})
 
 export default NavBar;
